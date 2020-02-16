@@ -7,6 +7,7 @@ public class MerchantLocationMO {
 
     private String latitude;
 
+
     private String longitude;
 
     public String getMerchantAddress() {
