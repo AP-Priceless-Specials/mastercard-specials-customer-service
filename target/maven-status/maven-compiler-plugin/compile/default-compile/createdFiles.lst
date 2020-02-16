@@ -1,0 +1,10 @@
+com\mastercard\api\OfferDetailResp.class
+com\mastercard\api\filter\OAuth.class
+com\mastercard\api\MastercardAPI.class
+com\mastercard\api\JSONUtil.class
+com\mastercard\api\MerchantLocationMO.class
+com\mastercard\api\filter\Util.class
+com\mastercard\api\MerchantResp.class
+com\mastercard\api\OfferImageResp.class
+com\mastercard\api\OfferResp.class
+com\mastercard\api\SpecialsAPI.class
