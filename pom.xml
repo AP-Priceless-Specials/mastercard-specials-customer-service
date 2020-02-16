@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>io.github.Mastercard-Platform</groupId>
-    <artifactId>mastercard-specials-customer-service</artifactId>
+    <artifactId>mastercard-specials-customer-services</artifactId>
     <version>1.0.1</version>
     <packaging>jar</packaging>
     <name>mastercard-specials-customer-service</name>
