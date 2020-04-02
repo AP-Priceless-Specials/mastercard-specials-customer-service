@@ -1,4 +1,4 @@
-package com.mastercard.api;
+package com.mastercard.api.entity;
 
 public class MerchantLocationMO {
     private static final long serialVersionUID = -1369655359559461681L;

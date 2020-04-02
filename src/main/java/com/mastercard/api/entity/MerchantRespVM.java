@@ -1,20 +1,36 @@
-package com.mastercard.api;
+package com.mastercard.api.entity;
 
+import java.io.Serializable;
 import java.util.List;
+import java.util.Map;
 
-public class MerchantResp {
+public class MerchantRespVM implements Serializable {
 
-    private static final long serialVersionUID = -6514978663935596620L;
+    private String merchantId;
+
     private String merchantName;
+
     private String merchantLogo;
-    private String merchantEmailAddress;
+
     private String merchantPhoneNumber;
+
     private String merchantCity;
+
     private String merchantCountryCode;
+
     private String merchantCountry;
+
     private String merchantWebsite;
-    //    private String coordinates;
-    private List<MerchantLocationMO> merchantLocations;
+
+    private  List<Map<String,List<MerchantLocationMODe>>> merchantLocationMODeList;
+
+    public String getMerchantId() {
+        return merchantId;
+    }
+
+    public void setMerchantId(String merchantId) {
+        this.merchantId = merchantId;
+    }
 
     public String getMerchantName() {
         return merchantName;
@@ -30,14 +46,6 @@ public class MerchantResp {
 
     public void setMerchantLogo(String merchantLogo) {
         this.merchantLogo = merchantLogo;
-    }
-
-    public String getMerchantEmailAddress() {
-        return merchantEmailAddress;
-    }
-
-    public void setMerchantEmailAddress(String merchantEmailAddress) {
-        this.merchantEmailAddress = merchantEmailAddress;
     }
 
     public String getMerchantPhoneNumber() {
@@ -80,11 +88,11 @@ public class MerchantResp {
         this.merchantWebsite = merchantWebsite;
     }
 
-    public List<MerchantLocationMO> getMerchantLocations() {
-        return merchantLocations;
+    public List<Map<String, List<MerchantLocationMODe>>> getMerchantLocationMODeList() {
+        return merchantLocationMODeList;
     }
 
-    public void setMerchantLocations(List<MerchantLocationMO> merchantLocations) {
-        this.merchantLocations = merchantLocations;
+    public void setMerchantLocationMODeList(List<Map<String, List<MerchantLocationMODe>>> merchantLocationMODeList) {
+        this.merchantLocationMODeList = merchantLocationMODeList;
     }
 }

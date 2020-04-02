@@ -1,6 +1,9 @@
 package com.mastercard.api;
 
+import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.alibaba.fastjson.TypeReference;
+import com.mastercard.api.entity.*;
 import com.mastercard.api.filter.OAuth;
 import org.springframework.util.StringUtils;
 
@@ -13,6 +16,7 @@ import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.security.KeyStore;
 import java.security.PrivateKey;
+import java.util.*;
 
 public class MastercardAPI {
 
@@ -20,7 +24,7 @@ public class MastercardAPI {
 
     public static final Charset UTF8_CHARSET = StandardCharsets.UTF_8;
 
-    public static String getLanguages(String fileName, String userName, String password, String oauth_consumer_key, String clientId) throws Exception {
+    public static List<LanguageResp> getLanguages(String fileName, String userName, String password, String oauth_consumer_key, String clientId) throws Exception {
         try {
             StringBuffer url = new StringBuffer();
             url.append(httpURL);
@@ -49,14 +53,18 @@ public class MastercardAPI {
                 sb.append(response);
             }
             connection.disconnect();
-            return sb.toString();
+            String language = sb.toString();
+            if(StringUtils.isEmpty(language)) return null;
+            String data = JSON.parseObject(language).getObject("data", String.class);
+            List<LanguageResp> offerResps = JSON.parseObject(data, new TypeReference<List<LanguageResp>>() {});
+            return offerResps;
         } catch (Exception e) {
             e.printStackTrace();
-            return e.getLocalizedMessage();
         }
+        return null;
     }
 
-    public static String getCagtegories(String fileName, String userName, String password, String oauth_consumer_key, String clientId, String language) {
+    public static List<CategoryResp> getCagtegories(String fileName, String userName, String password, String oauth_consumer_key, String clientId, String language) {
         try {
             StringBuffer url = new StringBuffer();
             url.append(httpURL);
@@ -85,21 +93,25 @@ public class MastercardAPI {
                 sb.append(response);
             }
             connection.disconnect();
-            return sb.toString();
+            String categories = sb.toString();
+            if(StringUtils.isEmpty(categories)) return null;
+            String data = JSON.parseObject(categories).getObject("data", String.class);
+            List<CategoryResp> categoryResp = JSON.parseObject(data, new TypeReference<List<CategoryResp>>() {});
+            return categoryResp;
         } catch (Exception e) {
             e.printStackTrace();
-            return e.getLocalizedMessage();
         }
+        return null;
     }
 
-    public static String getMerchants(String fileName, String userName, String password, String oauth_consumer_key, String clientId, String country_code, String merchant_id, String merchant_name) {
-        if (merchant_name == null) {
+    public static List<MerchantRespVM> getMerchants(String fileName, String userName, String password, String oauth_consumer_key, String clientId, String country_code, String merchant_id, String merchant_name) {
+        if (StringUtils.isEmpty(merchant_name)) {
             merchant_name = "";
         }
-        if (merchant_id == null) {
+        if (StringUtils.isEmpty(merchant_id)) {
             merchant_id = "";
         }
-        if (country_code == null) {
+        if (StringUtils.isEmpty(country_code)) {
             country_code = "";
         }
         try {
@@ -130,14 +142,18 @@ public class MastercardAPI {
                 sb.append(response);
             }
             connection.disconnect();
-            return sb.toString();
+            String merchants = sb.toString();
+            if(StringUtils.isEmpty(merchants)) return null;
+            String data = JSON.parseObject(merchants).getObject("data", String.class);
+            List<MerchantRespVM> merchantResp = JSON.parseObject(data, new TypeReference<List<MerchantRespVM>>() {});
+            return merchantResp;
         } catch (Exception e) {
             e.printStackTrace();
-            return e.getLocalizedMessage();
         }
+        return null;
     }
 
-    public static String getCountries(String fileName, String userName, String password, String oauth_consumer_key, String clientId, String language) {
+    public static List<CountryResp> getCountries(String fileName, String userName, String password, String oauth_consumer_key, String clientId, String language) {
         try {
             StringBuffer url = new StringBuffer();
             url.append(httpURL);
@@ -166,14 +182,18 @@ public class MastercardAPI {
                 sb.append(response);
             }
             connection.disconnect();
-            return sb.toString();
+            String countries = sb.toString();
+            if(StringUtils.isEmpty(countries)) return null;
+            String data = JSON.parseObject(countries).getObject("data", String.class);
+            List<CountryResp> countriesResp = JSON.parseObject(data, new TypeReference<List<CountryResp>>() {});
+            return countriesResp;
         } catch (Exception e) {
             e.printStackTrace();
-            return e.getLocalizedMessage();
         }
+        return null;
     }
 
-    public static String getMastercardProducts(String fileName, String userName, String password, String oauth_consumer_key, String clientId, String language) {
+    public static List<MastercardProductResp> getMastercardProducts(String fileName, String userName, String password, String oauth_consumer_key, String clientId, String language) {
         try {
             StringBuffer url = new StringBuffer();
             url.append(httpURL);
@@ -202,14 +222,18 @@ public class MastercardAPI {
                 sb.append(response);
             }
             connection.disconnect();
-            return sb.toString();
+            String mastercardProducts = sb.toString();
+            if(StringUtils.isEmpty(mastercardProducts)) return null;
+            String data = JSON.parseObject(mastercardProducts).getObject("data", String.class);
+            List<MastercardProductResp> mastercardProductsResp = JSON.parseObject(data, new TypeReference<List<MastercardProductResp>>() {});
+            return mastercardProductsResp;
         } catch (Exception e) {
             e.printStackTrace();
-            return e.getLocalizedMessage();
         }
+        return null;
     }
 
-    public static String getPrograms(String fileName, String userName, String password, String oauth_consumer_key, String clientId, String language, String eligible_markets) {
+    public static List<ProgramResp> getPrograms(String fileName, String userName, String password, String oauth_consumer_key, String clientId, String language, String eligible_markets) {
         try {
             StringBuffer url = new StringBuffer();
             url.append(httpURL);
@@ -238,14 +262,18 @@ public class MastercardAPI {
                 sb.append(response);
             }
             connection.disconnect();
-            return sb.toString();
+            String programs = sb.toString();
+            if(StringUtils.isEmpty(programs)) return null;
+            String data = JSON.parseObject(programs).getObject("data", String.class);
+            List<ProgramResp> ProgramRespResp = JSON.parseObject(data, new TypeReference<List<ProgramResp>>() {});
+            return ProgramRespResp;
         } catch (Exception e) {
             e.printStackTrace();
-            return e.getLocalizedMessage();
         }
+        return null;
     }
 
-    public static String getTags(String fileName, String userName, String password, String oauth_consumer_key, String clientId) {
+    public static List<TagVO> getTags(String fileName, String userName, String password, String oauth_consumer_key, String clientId) {
         try {
             StringBuffer url = new StringBuffer();
             url.append(httpURL);
@@ -274,14 +302,18 @@ public class MastercardAPI {
                 sb.append(response);
             }
             connection.disconnect();
-            return sb.toString();
+            String tags = sb.toString();
+            if(StringUtils.isEmpty(tags)) return null;
+            String data = JSON.parseObject(tags).getObject("data", String.class);
+            List<TagVO> tagsResp = JSON.parseObject(data, new TypeReference<List<TagVO>>() {});
+            return tagsResp;
         } catch (Exception e) {
             e.printStackTrace();
-            return e.getLocalizedMessage();
         }
+        return null;
     }
 
-    public static String getBenefits(String fileName, String userName, String password,
+    public static List<BenefitResp> getBenefits(String fileName, String userName, String password,
                                      String oauth_consumer_key, String clientId,
                                      String language,
                                      String category,
@@ -291,31 +323,31 @@ public class MastercardAPI {
                                      String benefit_title,
                                      Integer limit, Integer offset,
                                      String sort) {
-        if (language == null) {
+        if (StringUtils.isEmpty(language)) {
             language = "";
         }
-        if (category == null) {
+        if (StringUtils.isEmpty(category)) {
             category = "";
         }
-        if (eligible_markets == null) {
+        if (StringUtils.isEmpty(eligible_markets)) {
             eligible_markets = "";
         }
-        if (destination_markets == null) {
+        if (StringUtils.isEmpty(destination_markets)) {
             destination_markets = "";
         }
-        if (mastercard_product == null) {
+        if (StringUtils.isEmpty(mastercard_product)) {
             mastercard_product = "";
         }
-        if (last_modified_date == null) {
+        if (StringUtils.isEmpty(last_modified_date)) {
             last_modified_date = "";
         }
-        if (coordinates == null) {
+        if (StringUtils.isEmpty(coordinates)) {
             coordinates = "";
         }
-        if (merchant_name == null) {
+        if (StringUtils.isEmpty(merchant_name)) {
             merchant_name = "";
         }
-        if (benefit_title == null) {
+        if (StringUtils.isEmpty(benefit_title)) {
             benefit_title = "";
         }
         String lim = "";
@@ -361,22 +393,26 @@ public class MastercardAPI {
                 sb.append(response);
             }
             connection.disconnect();
-            return sb.toString();
+            String benefits = sb.toString();
+            if(StringUtils.isEmpty(benefits)) return null;
+            String data = JSON.parseObject(benefits).getObject("data", String.class);
+            List<BenefitResp> benefitsResp = JSON.parseObject(data, new TypeReference<List<BenefitResp>>() {});
+            return benefitsResp;
         } catch (Exception e) {
             e.printStackTrace();
-            return e.getLocalizedMessage();
         }
+        return null;
     }
 
-    public static String getOffers(String fileName, String userName, String password,
-                                   String oauth_consumer_key, String clientId,
-                                   String language,
-                                   String category, String eligible_markets,
-                                   String destination_markets, String mastercard_product, String program, String tags,
-                                   String last_modified_date, String coordinates, String merchantName,
-                                   String card_product_id, String issuer_id,
-                                   String offer_title, String merchant_type,
-                                   Integer limit, Integer offset, String sort) {
+    public static List<OfferResp> getOffers(String fileName, String userName, String password,
+                                            String oauth_consumer_key, String clientId,
+                                            String language,
+                                            String category, String eligible_markets,
+                                            String destination_markets, String mastercard_product, String program, String tags,
+                                            String last_modified_date, String coordinates, String merchantName,
+                                            String card_product_id, String issuer_id,
+                                            String offer_title, String merchant_type,
+                                            Integer limit, Integer offset, String sort) {
         if (language == null) {
             language = "";
         }
@@ -404,8 +440,10 @@ public class MastercardAPI {
         if (coordinates == null) {
             coordinates = "";
         }
-        if (merchantName == null) {
+        if (StringUtils.isEmpty(merchantName)) {
             merchantName = "";
+        }else{
+            merchantName = dealWithString(merchantName);
         }
         if (card_product_id == null) {
             card_product_id = "";
@@ -413,8 +451,10 @@ public class MastercardAPI {
         if (issuer_id == null) {
             issuer_id = "";
         }
-        if (offer_title == null) {
+        if (StringUtils.isEmpty(offer_title)) {
             offer_title = "";
+        }else{
+            offer_title = dealWithString(offer_title);
         }
         if (merchant_type == null) {
             merchant_type = "";
@@ -438,6 +478,7 @@ public class MastercardAPI {
             StringBuffer url = new StringBuffer();
             url.append(httpURL);
             url.append("/offers?language=" + language + "&category=" + category + "&eligible_markets=" + eligible_markets + "&destination_markets=" + destination_markets + "&mastercard_product=" + mastercard_product + "&program=" + program + "&tags=" + tags + "&last_modified_date=" + last_modified_date + "&coordinates=" + coordinates + "&merchantName=" + merchantName + "&card_product_id=" + card_product_id + "&issuer_id=" + issuer_id + "&offer_title=" + offer_title + "&merchant_type=" + merchant_type + "&limit=" + lim + "&offset=" + off + "&sort=" + sort);
+            System.out.println(url);
             HttpsURLConnection connection = (HttpsURLConnection) new URL(url.toString()).openConnection();
             connection.setDoInput(true);
             connection.setDoOutput(true);
@@ -462,11 +503,22 @@ public class MastercardAPI {
                 sb.append(response);
             }
             connection.disconnect();
-            return sb.toString();
+            String jsonOffer = sb.toString();
+            if(StringUtils.isEmpty(jsonOffer)) return null;
+            String data = JSON.parseObject(jsonOffer).getObject("data", String.class);
+            List<OfferResp> offerResps = JSON.parseObject(data, new TypeReference<List<OfferResp>>() {});
+            return offerResps;
         } catch (Exception e) {
             e.printStackTrace();
-            return e.getLocalizedMessage();
         }
+        return null;
+    }
+
+    private static String dealWithString(String string) {
+        String blank = string.replace(" ", "%20");
+        String and =  blank.replace("&", "%26");
+        String que = and.replace("?", "%3F");
+        return que;
     }
 
     public static void sign(HttpsURLConnection req, String fileName, String userName, String password, String oauth_consumer_key) throws Exception {
@@ -478,7 +530,8 @@ public class MastercardAPI {
         }
         JSONObject jsonObject = new JSONObject();
         String method = req.getRequestMethod();
-        String authHeader = OAuth.getAuthorizationHeader(uri, method, jsonObject.toString(), StandardCharsets.UTF_8, oauth_consumer_key, loadSigningKey(getFilePath(fileName) + fileName, userName, password));
+//        String authHeader = OAuth.getAuthorizationHeader(uri, method, jsonObject.toString(), StandardCharsets.UTF_8, oauth_consumer_key, loadSigningKey(getFilePath(fileName) + fileName, userName, password));
+        String authHeader = OAuth.getAuthorizationHeader(uri, method, jsonObject.toString(), StandardCharsets.UTF_8, oauth_consumer_key, loadSigningKey(fileName, userName, password));
 //        String authHeader = OAuth.getAuthorizationHeader(uri, method, jsonObject.toString(), StandardCharsets.UTF_8, oauth_consumer_key, loadSigningKey(fileName, userName, password));
         req.setRequestProperty(OAuth.AUTHORIZATION_HEADER_NAME, authHeader);
     }
@@ -508,6 +561,7 @@ public class MastercardAPI {
         pkcs12KeyStore.load(new FileInputStream(pkcs12KeyFilePath), signingKeyPassword.toCharArray());
         return (PrivateKey) pkcs12KeyStore.getKey(signingKeyAlias, signingKeyPassword.toCharArray());
     }
+
 }
 
 

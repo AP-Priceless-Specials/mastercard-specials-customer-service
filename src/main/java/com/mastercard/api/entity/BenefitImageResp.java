@@ -1,9 +1,13 @@
-package com.mastercard.api;
+package com.mastercard.api.entity;
 
-public class OfferImageResp {
+import java.io.Serializable;
 
-    private static final long serialVersionUID = 8755482765696465557L;
+public class BenefitImageResp implements Serializable {
+
+    private static final long serialVersionUID = -6418540611375309234L;
+
     private String rectangleImage;
+
     private String squareImage;
 
     public String getRectangleImage() {

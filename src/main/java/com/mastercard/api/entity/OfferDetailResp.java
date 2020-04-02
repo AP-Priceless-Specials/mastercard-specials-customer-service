@@ -1,4 +1,4 @@
-package com.mastercard.api;
+package com.mastercard.api.entity;
 
 import java.util.List;
 

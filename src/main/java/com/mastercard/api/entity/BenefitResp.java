@@ -1,13 +1,15 @@
-package com.mastercard.api;
+package com.mastercard.api.entity;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class OfferResp {
+public class BenefitResp implements Serializable {
 
-    private static final long serialVersionUID = 1516099002591093501L;
+    private static final long serialVersionUID = -6732456613260382733L;
+
     private String language;
 
-    private OfferDetailResp offerDetails;
+    private BenefitDetailResp benefitDetails;
 
     private List<String> eligibleMastercardProducts;
 
@@ -17,7 +19,7 @@ public class OfferResp {
 
     private MerchantResp merchantDetails;
 
-    private OfferImageResp offerImages;
+    private BenefitImageResp benefitImages;
 
     public String getLanguage() {
         return language;
@@ -27,12 +29,12 @@ public class OfferResp {
         this.language = language;
     }
 
-    public OfferDetailResp getOfferDetails() {
-        return offerDetails;
+    public BenefitDetailResp getBenefitDetails() {
+        return benefitDetails;
     }
 
-    public void setOfferDetails(OfferDetailResp offerDetails) {
-        this.offerDetails = offerDetails;
+    public void setBenefitDetails(BenefitDetailResp benefitDetails) {
+        this.benefitDetails = benefitDetails;
     }
 
     public List<String> getEligibleMastercardProducts() {
@@ -67,11 +69,11 @@ public class OfferResp {
         this.merchantDetails = merchantDetails;
     }
 
-    public OfferImageResp getOfferImages() {
-        return offerImages;
+    public BenefitImageResp getBenefitImages() {
+        return benefitImages;
     }
 
-    public void setOfferImages(OfferImageResp offerImages) {
-        this.offerImages = offerImages;
+    public void setBenefitImages(BenefitImageResp benefitImages) {
+        this.benefitImages = benefitImages;
     }
 }
