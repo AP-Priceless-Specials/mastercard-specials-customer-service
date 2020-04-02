@@ -6,7 +6,7 @@
 
     <groupId>io.github.Mastercard-Platform</groupId>
     <artifactId>mastercard-specials-customer-service</artifactId>
-    <version>1.0.0</version>
+    <version>1.0.2</version>
     <packaging>jar</packaging>
     <name>mastercard-specials-customer-service</name>
     <url>https://github.com/Mastercard-Platform/mastercard-specials-customer-service</url>
