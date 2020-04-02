@@ -47,7 +47,6 @@
         <feign-version>9.4.0</feign-version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <gpg.signature.skip>false</gpg.signature.skip>
-        <java.version>1.8</java.version>
         <log4j.version>1.2.17</log4j.version>
     </properties>
 
@@ -88,8 +87,8 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <configuration>
-                    <source>1.7</source>
-                    <target>1.7</target>
+                    <source>8</source>
+                    <target>8</target>
                 </configuration>
             </plugin>
             <plugin>
