@@ -404,7 +404,7 @@ public class MastercardAPI {
         return null;
     }
 
-    public static List<OfferResp> getOffers(String fileName, String userName, String password,
+    public static List<OfferResp> getOffers(String filePath, String userName, String password,
                                             String oauth_consumer_key, String clientId,
                                             String language,
                                             String category, String eligible_markets,
@@ -413,31 +413,31 @@ public class MastercardAPI {
                                             String card_product_id, String issuer_id,
                                             String offer_title, String merchant_type,
                                             Integer limit, Integer offset, String sort) {
-        if (language == null) {
+        if (StringUtils.isEmpty(language)) {
             language = "";
         }
-        if (category == null) {
+        if (StringUtils.isEmpty(category)) {
             category = "";
         }
-        if (eligible_markets == null) {
+        if (StringUtils.isEmpty(eligible_markets)) {
             eligible_markets = "";
         }
-        if (destination_markets == null) {
+        if (StringUtils.isEmpty(destination_markets)) {
             destination_markets = "";
         }
-        if (mastercard_product == null) {
+        if (StringUtils.isEmpty(mastercard_product)) {
             mastercard_product = "";
         }
-        if (program == null) {
+        if (StringUtils.isEmpty(program)) {
             program = "";
         }
-        if (tags == null) {
+        if (StringUtils.isEmpty(tags)) {
             tags = "";
         }
-        if (last_modified_date == null) {
+        if (StringUtils.isEmpty(last_modified_date)) {
             last_modified_date = "";
         }
-        if (coordinates == null) {
+        if (StringUtils.isEmpty(coordinates)) {
             coordinates = "";
         }
         if (StringUtils.isEmpty(merchantName)) {
@@ -445,10 +445,10 @@ public class MastercardAPI {
         }else{
             merchantName = dealWithString(merchantName);
         }
-        if (card_product_id == null) {
+        if (StringUtils.isEmpty(card_product_id)) {
             card_product_id = "";
         }
-        if (issuer_id == null) {
+        if (StringUtils.isEmpty(issuer_id)){
             issuer_id = "";
         }
         if (StringUtils.isEmpty(offer_title)) {
@@ -456,7 +456,7 @@ public class MastercardAPI {
         }else{
             offer_title = dealWithString(offer_title);
         }
-        if (merchant_type == null) {
+        if (StringUtils.isEmpty(merchant_type)) {
             merchant_type = "";
         }
         String lim = "";
@@ -485,7 +485,7 @@ public class MastercardAPI {
             connection.setRequestMethod("GET");
             connection.setRequestProperty("Content-Type", "application/json; charset=" + UTF8_CHARSET.name());
             connection.setRequestProperty("x-openApi-clientId", clientId);
-            sign(connection, fileName, userName, password, oauth_consumer_key);
+            sign(connection, filePath, userName, password, oauth_consumer_key);
             connection.connect();
             InputStream is = null;
             if (connection.getResponseCode() != 200) {
